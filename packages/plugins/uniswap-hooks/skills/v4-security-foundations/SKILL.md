@@ -55,7 +55,7 @@ All 14 hook permissions with associated risk levels:
 
 ## CRITICAL: NoOp Rug Pull Attack
 
-The `BEFORE_SWAP_RETURNS_DELTA` permission (bit 10) is the most dangerous hook permission. A malicious hook can:
+The `BEFORE_SWAP_RETURNS_DELTA` permission (bit 3, `1 << 3`) is the most dangerous hook permission. A malicious hook can:
 
 1. Return a delta claiming it handled the entire swap
 2. PoolManager accepts this and settles the trade
@@ -249,7 +249,7 @@ Start with all permissions disabled. Enable only what you need:
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.24;
 
-import {BaseHook} from "v4-periphery/src/base/hooks/BaseHook.sol";
+import {BaseHook} from "@openzeppelin/uniswap-hooks/src/base/BaseHook.sol";
 import {Hooks} from "v4-core/src/libraries/Hooks.sol";
 import {IPoolManager} from "v4-core/src/interfaces/IPoolManager.sol";
 import {PoolKey} from "v4-core/src/types/PoolKey.sol";

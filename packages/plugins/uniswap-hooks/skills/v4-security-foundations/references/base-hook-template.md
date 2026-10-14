@@ -8,7 +8,7 @@ A security-first Solidity template for Uniswap v4 hooks with all permissions dis
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.24;
 
-import {BaseHook} from "v4-periphery/src/base/hooks/BaseHook.sol";
+import {BaseHook} from "@openzeppelin/uniswap-hooks/src/base/BaseHook.sol";
 import {Hooks} from "v4-core/src/libraries/Hooks.sol";
 import {IPoolManager} from "v4-core/src/interfaces/IPoolManager.sol";
 import {PoolKey} from "v4-core/src/types/PoolKey.sol";
@@ -27,7 +27,6 @@ contract SecureHook is BaseHook {
     // ERRORS
     // ═══════════════════════════════════════════════════════════════════════
 
-    error NotPoolManager();
     error RouterNotAllowed();
     error ZeroAddress();
     error NotAdmin();
@@ -65,11 +64,7 @@ contract SecureHook is BaseHook {
     // MODIFIERS
     // ═══════════════════════════════════════════════════════════════════════
 
-    /// @notice Ensures caller is the PoolManager
-    modifier onlyPoolManager() {
-        if (msg.sender != address(poolManager)) revert NotPoolManager();
-        _;
-    }
+    // onlyPoolManager is inherited from BaseHook; do not redeclare it.
 
     /// @notice Ensures sender (router) is allowlisted
     modifier onlyAllowedRouter(address sender) {
